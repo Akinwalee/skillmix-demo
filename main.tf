@@ -11,11 +11,12 @@ provider "aws" {
   region = "us-east-1"
 }
 
-#create a remote backend
-terraform {
-  backend "s3" {
-    bucket = "automated-skillmix-bucket"
-    key = "path/to/my/key"
-    region = "us-east-1"
+#create EC2 instance
+resource "aws_instance" "web_server" {
+  ami           = "ami-052efd3df9dad4825"
+  instance_type = "t2.micro"
+
+  tags = {
+    Name = "skillmix-lab-instance"
   }
 }
